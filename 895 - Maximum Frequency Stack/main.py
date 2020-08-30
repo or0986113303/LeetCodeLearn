@@ -7,19 +7,19 @@ class FreqStack(object):
         self.maxfreq = 0
 
     def push(self, x):
-        f = self.freq[x] + 1
-        self.freq[x] = f
-        if f > self.maxfreq:
-            self.maxfreq = f
-        self.group[f].append(x)
+        freqtmp = self.freq[x] + 1
+        self.freq[x] = freqtmp
+        if freqtmp > self.maxfreq:
+            self.maxfreq = freqtmp
+        self.group[freqtmp].append(x)
 
     def pop(self):
-        x = self.group[self.maxfreq].pop()
-        self.freq[x] -= 1
+        result = self.group[self.maxfreq].pop()
+        self.freq[result] -= 1
         if not self.group[self.maxfreq]:
             self.maxfreq -= 1
 
-        return x
+        return result
         
         
 
