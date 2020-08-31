@@ -17,20 +17,10 @@ class Solution(object):
             operatorindex = min(fiboprev2 + indexoffset, length - 1)
         
             if source[operatorindex] > target:
-                '''
-                fibosum = fiboprev2
-                fiboprev1 = fiboprev1 - fiboprev2
-                fiboprev2 = fibosum - fiboprev1
-                '''
                 fibosum = fiboprev1
                 fiboprev1 = fiboprev2
                 fiboprev2 = fibosum - fiboprev1
             elif source[operatorindex] < target:
-                '''
-                fibosum = fiboprev1 
-                fiboprev1 = fiboprev2 
-                fiboprev2 = fibosum - fiboprev1 
-                '''
                 fiboprev2 = fiboprev1
                 fiboprev1 = fibosum
                 fibosum = fiboprev1 + fiboprev2
