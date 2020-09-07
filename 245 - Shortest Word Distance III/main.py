@@ -6,24 +6,24 @@ class Solution(object):
         :type word2: str
         :rtype: int
         """
-        hashtable = {}
-        result = {}
+        if not word1 or not word2:
+            return 0
+        wordshash = {}
+        for index, part in enumerate(words):
+            if part not in wordshash:
+                wordshash[part] = [index]
+            else:
+                wordshash[part].append(index)
         
-        for index, parts in enumerate(words):
-            if not parts in hashtable:
-                hashtable[parts] = [index]
-            else :
-                hashtable[parts].append(index)
+        minidistance = float('inf')
         
-        for position1 in hashtable[word1]:
-            for position2 in hashtable[word2]:
-                if not (word1, word2) in result :
-                    if position1 != position2 :
-                        result[(word1, word2)] = abs(position1 - position2)
-                else :
-                    if position1 != position2 :
-                        result[(word1, word2)] = min(result[(word1, word2)], abs(position1 - position2))
-        return result[(word1, word2)]
+        if word1 in wordshash:
+            for position1 in wordshash[word1]:
+                if word2 in wordshash:
+                    for position2 in wordshash[word2]:
+                        if position1 != position2:
+                            minidistance = min(minidistance, abs(position1 - position2))
+        return minidistance
         
 if __name__ == '__main__':
     words = ["a","a"]

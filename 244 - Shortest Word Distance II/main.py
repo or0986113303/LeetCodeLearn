@@ -1,28 +1,33 @@
 class WordDistance(object):
     
     def __init__(self, words):
-        self.__source__ = words
-        self.__hashatable__ = {}
-        self.__result__ = {}
-        self.__hashatable__ = self.__createhashfromsource__(words)
+        """
+        :type words: List[str]
+        """
+        self.__wordshash__ = {}
+        for index, part in enumerate(words):
+            if part not in self.__wordshash__:
+                self.__wordshash__[part] = [index]
+            else :
+                self.__wordshash__[part].append(index)
         
-    def __createhashfromsource__(self, source):
-        tmphash = {}
-        for index, parts in enumerate(source):
-            if not parts in tmphash:
-                tmphash[parts] = [index]
-            else:
-                tmphash[parts].append(index)
-        return tmphash
-        
+
     def shortest(self, word1, word2):
-        for position1 in self.__hashatable__[word1]:
-            for position2 in self.__hashatable__[word2]:
-                if not (word1, word2) in self.__result__:
-                    self.__result__[(word1, word2)] = abs(position1 - position2)
-                else :
-                    self.__result__[(word1, word2)] = min(self.__result__[(word1, word2)], abs(position1 - position2))
-        return self.__result__[(word1, word2)]
+        """
+        :type word1: str
+        :type word2: str
+        :rtype: int
+        """
+        if not word1 or not word2:
+            return 0
+        minidistance = float('inf')
+        if word1 in self.__wordshash__:
+            for position1 in self.__wordshash__[word1]:
+                if word2 in self.__wordshash__:
+                    for position2 in self.__wordshash__[word2]:
+                        if position1 != position2:
+                            minidistance = min(minidistance, abs(position1 - position2))
+        return minidistance
 
 if __name__ == "__main__":
     words = ["a","a"]
