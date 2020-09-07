@@ -4,7 +4,7 @@ class Solution(object):
             return
         sourcetmp = source
         tmptarget = target[startindex:]
-        for index, parts in enumerate(tmptarget) :
+        for _, parts in enumerate(tmptarget) :
             tmpresult = sourcetmp.split(parts)
             sourcetmp = ''
             for _, subparts in enumerate(tmpresult) :
