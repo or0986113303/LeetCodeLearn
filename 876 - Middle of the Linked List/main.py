@@ -4,22 +4,17 @@
 #         self.val = val
 #         self.next = next
 class Solution(object):
-    def rescusionofmiddlevalue(self, source, index, count):
-        if not source:
+    def cleanlistbeforemiddle(self, curr, middle, index):
+        if curr is None :
+            return curr
+        elif index == middle:
+            return curr
+        else : 
+            return self.cleanlistbeforemiddle(curr.next, middle, index + 1)
+    def determincapacity(self, curr):
+        if curr is None:
             return 0
-        count += 1
-        result = 0
-        if count == index:
-            result = source.val
-            return source.next
-            
-        return self.rescusionofmiddlevalue(source.next, index, count)
-        
-    def recursionoflength(self, source, count):
-        if not source:
-            return
-        count[0] += 1
-        self.recursionoflength(source.next, count)
+        return 1+ self.determincapacity(curr.next)
     def middleNode(self, head):
         """
         :type head: ListNode
@@ -27,12 +22,9 @@ class Solution(object):
         """
         if not head :
             return head
-        elif not head.next:
-            return head
-        length = [0]
-        self.recursionoflength(head, length)
-        print(length)
-        middle = length[0] // 2
-        result = self.rescusionofmiddlevalue(head, middle, 0)
-        print(result)
+        
+        capacity = self.determincapacity(head)
+        middle = capacity // 2
+        
+        result = self.cleanlistbeforemiddle(head, middle, 0)
         return result
