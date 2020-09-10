@@ -5,24 +5,24 @@
 #         self.next = next
 class Solution(object):
     def dfsmerge(self, l1, l2, result):
-        if not l1 and not l2:
+        if l1 is None and l2 is None:
             return
-        elif not l1 and l2:
-            result.next = l2
-            result = result.next
-            self.dfsmerge(l1, l2.next, result)
-        elif not l2 and l1:
+        
+        if l1 is not None and l2 is None:
             result.next = l1
-            result = result.next
-            self.dfsmerge(l1.next, l2, result)
-        elif l1.val > l2.val:
+            l1 = l1.next
+        elif l2 is not None and l1 is None:
             result.next = l2
-            result = result.next
-            self.dfsmerge(l1, l2.next, result)
+            l2 = l2.next
+        elif l1.val > l2.val and l1 is not None and l2 is not None:
+            result.next = l2
+            l2 = l2.next
         else :
             result.next = l1
-            result = result.next
-            self.dfsmerge(l1.next, l2, result)
+            l1 = l1.next
+        
+        self.dfsmerge(l1, l2, result.next)
+        
     
     def makefromsource(self, source, result):
         if not source:
@@ -58,7 +58,8 @@ class Solution(object):
         sourcetmp = l1tmp + l2tmp
         sourcetmp.sort()
         result = ListNode()
+        operator = result
         #self.makeresult(sourcetmp, result)
-        self.dfsmerge(l1, l2, result)
+        self.dfsmerge(l1, l2, operator)
         return result.next
         
