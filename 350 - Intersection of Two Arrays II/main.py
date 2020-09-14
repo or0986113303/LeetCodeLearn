@@ -1,3 +1,4 @@
+import collections
 class Solution(object):
     def intersect(self, nums1, nums2):
         """
@@ -5,19 +6,16 @@ class Solution(object):
         :type nums2: List[int]
         :rtype: List[int]
         """
-        length1 = len(nums1)
-        length2 = len(nums2)
         
-        if length1 > length2:
-            target = nums2
-            source = nums1
-        else :
-            target = nums1
-            source = nums2
+        source = collections.Counter(nums1) if collections.Counter(nums1) > collections.Counter(nums2) else collections.Counter(nums2)
+        target = collections.Counter(nums2) if source == collections.Counter(nums1) else collections.Counter(nums1)
         result = []
-        for parts in target:
-            if parts in source:
-                source.remove(parts)
-                result.append(parts)
+        
+        for part, key in enumerate(target):
+            if key in source:
+                for _ in range(0, min(target[key], source[key]), 1):
+                    result.append(key)
+        print(result)
         return result
+        
         
