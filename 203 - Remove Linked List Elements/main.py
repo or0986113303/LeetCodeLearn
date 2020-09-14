@@ -4,21 +4,16 @@
 #         self.val = val
 #         self.next = next
 class Solution(object):
-    def recursionremove(self, curr, prev, val):
-        #print('prev : ' + str(prev))
-        #print('curr : ' + str(curr))
-        if not curr :
+    def recursivetoremove(self, curr, prev, target):
+        if curr is None:
             return 
-        if curr.val == val:
-            tmp = curr.next
-            prev.next = tmp
-            curr = curr.next
-        else:
-            prev.next = curr
-            prev = curr
-            curr = curr.next
-                
-        return self.recursionremove(curr, prev, val)
+        
+        if curr.val == target:
+            prev.next = curr.next
+        else :
+            prev = prev.next
+        curr = curr.next
+        self.recursivetoremove(curr, prev, target)
     
     def removeElements(self, head, val):
         """
@@ -26,12 +21,14 @@ class Solution(object):
         :type val: int
         :rtype: ListNode
         """
-        if not head :
+        
+        if head is None:
             return head
         
-        result = ListNode(-1)
-        prev = result
-        self.recursionremove(head, prev, val)
-        #print(head)
-        #print(result)
-        return result.next
+        dummy = ListNode(0)
+        prev = dummy
+        prev.next = head
+        
+        self.recursivetoremove(head, prev, val)
+        
+        return dummy.next
