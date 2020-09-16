@@ -23,26 +23,26 @@ class Solution(object):
         return res
 
     def threeSumClosest(self, nums, target):
-        if not nums:
-            return 0
-        elif len(nums) == 1:
-            return nums[0]
+        if nums is None:
+            return -1
+        elif len(nums) < 3:
+            return -1
         
-        result = float('inf')
-        length = len(nums) 
+        # assume the source is a binary tree
         nums.sort()
-
-        for index in range(0, length , 1):
-            leftindex, rightindex = index + 1, length -1
-            while rightindex > leftindex:
-                sumtmp = nums[index] + nums[leftindex] + nums[rightindex]
-                if abs(sumtmp - target) < abs(result - target):
+        capacity = len(nums)
+        result = float('inf')
+        for index in range(0, capacity, 1):
+            headindex, tailindex = index + 1, capacity - 1
+            while headindex < tailindex:
+                sumtmp = source[headindex] + source[index] + source[tailindex]
+                if abs(result - target) > abs(sumtmp - target):
                     result = sumtmp
-                if sumtmp > target:
-                    rightindex -= 1
+                if sumtmp > target :
+                    tailindex -= 1
                 elif sumtmp < target:
-                    leftindex += 1
-                else:
+                    headindex += 1
+                else :
                     return target
         return result
 
