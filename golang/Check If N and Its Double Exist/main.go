@@ -47,22 +47,22 @@ func mergesort(src []int) (result []int) {
 	return merge(mergesort(left), mergesort(right))
 }
 
-func binarySearch(haystack []int, needle int) bool {
+func binarySearch(src []int, target int) bool {
 
 	low := 0
-	high := len(haystack) - 1
+	high := len(src) - 1
 
 	for low <= high {
 		median := (low + high) / 2
 
-		if haystack[median] < needle {
+		if src[median] < target {
 			low = median + 1
 		} else {
 			high = median - 1
 		}
 	}
 
-	if low == len(haystack) || haystack[low] != needle {
+	if low == len(src) || src[low] != target {
 		return false
 	}
 
