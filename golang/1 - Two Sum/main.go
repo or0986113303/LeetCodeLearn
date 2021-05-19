@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func two_sum(src []int, target int) []int {
+func Two_sum(src []int, target int) []int {
 	if src == nil {
 		return nil
 	}
@@ -27,6 +27,6 @@ func main() {
 	fmt.Println("hello")
 	src := []int{2, 7, 11, 15}
 	target := 9
-	result := two_sum(src, target)
+	result := Two_sum(src, target)
 	fmt.Println(result)
 }
