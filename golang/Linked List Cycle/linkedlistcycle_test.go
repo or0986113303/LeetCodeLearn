@@ -12,10 +12,10 @@ func TestLinkedlistcycle(t *testing.T) {
 		wantResult bool
 	}{
 		{
-			name : "Normal test for long input",
-			args: args{ListNode{ Val :  }},
+			name:       "Normal test for long input",
+			args:       args{&ListNode{Val: 3, Next: &ListNode{Val: 2, Next: &ListNode{Val: 0, Next: &ListNode{Val: 4, Next: nil}}}}},
 			wantResult: false,
-		}.
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
